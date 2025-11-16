@@ -10,6 +10,21 @@ This repository includes:
 - Tools to **train CoCoA light** variations.
 - Utilities for **extracting results** and **building tables**.
 
+## Project structure
+
+```
+├── models/
+│   └── mlp.py              # MLP model architecture
+├── data/
+│   ├── loaders.py          # Data loading and preprocessing
+│   └── utils.py            # Helper functions for loading managers
+├── results_csv/            # Recorded results
+├── train_cocoa.py          # Main training script
+├── evaluate_cocoa.py       # Evaluation script
+├── run_eval_all_methods.py # Metric computation
+└── extract_results.py      # Aggregate and export results
+```
+
 ## Running LM-Polygraph
 
 Inference relies on a compatible version of **LM-Polygraph**.
@@ -83,25 +98,39 @@ bash grid_search_layers_mean.sh
 To enrich experimental managers with a predicted Consistency scores, run the following script:
 
 ```bash
-python evaluate_cocoa.py \
-    --dataset coqa \
-    --manager_dir "/path/to/managers" \
-    --save_path "workdir/" \
-    --selected_layer 15 \
-    --pooling_type mean \
-    --num_train_epochs 20
+python evaluate_cocoa.py
 ```
 
 ## Extracting Results
 
+To evaluate all computed metrics based on collected statistics, use the following command: 
+
+```bash
+python run_eval_all_methods.py
+```
+
+
 After inference and training are complete, you can extract and record results to csv using:
 
 ```bash
-python evaluate_cocoa.py \
+python extract_results.py 
 ```
 
-In *tables.ipynb* you can find scipts to produce the tables from main parts of the paper. 
+In *build_tables.ipynb* you can find scipts to produce the tables from main parts of the paper and detailed experimantal results. 
 
 ## Citation
+
+If you find this work useful, please cite:
+
+```
+@inproceedings{
+vashurin2025cocoa,
+title={CoCoA: A Minimum Bayes Risk Framework Bridging Confidence and Consistency for Uncertainty Quantification in {LLM}s},
+author={Roman Vashurin and Maiya Goloburda and Albina Ilina and Aleksandr Rubashevskii and Preslav Nakov and Artem Shelmanov and Maxim Panov},
+booktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems},
+year={2025},
+url={https://openreview.net/forum?id=H1NGlLNaVC}
+}
+```
 
 
